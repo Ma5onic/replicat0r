@@ -1,0 +1,6 @@
+.git/
+publish/dst_policy.json
+publish/s3_src.txt
+publish/src_replica.json
+publish/src_policy.json
+conf/setup.conf

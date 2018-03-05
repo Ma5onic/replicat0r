@@ -1,0 +1,12 @@
+{
+  "Role": "arn:aws:iam::XACCOUNTX:role/XROLEX",
+  "Rules": [
+    {
+      "Prefix": "",
+      "Status": "Enabled",
+      "Destination": {
+        "Bucket": "arn:aws:s3:::BUCKET-replica"
+      }
+    }
+  ]
+}
