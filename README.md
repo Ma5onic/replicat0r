@@ -57,19 +57,10 @@ Add a bucket policy similar to the one below, or append the two statements onto 
                 "s3:Get*",
                 "s3:List*"
             ],
-            "Resource": "arn:aws:s3:::[SOURCE BUCKET]"
-        },
-        {
-            "Sid": "PreSeed Temp #2",
-            "Effect": "Allow",
-            "Principal": {
-                "AWS": "arn:aws:iam::[DST ACCOUNT ID]:root"
-            },
-            "Action": [
-                "s3:Get*",
-                "s3:List*"
-            ],
-            "Resource": "arn:aws:s3:::[SOURCE BUCKET]/*"
+            "Resource": [
+                "arn:aws:s3:::[SOURCE BUCKET]",
+                "arn:aws:s3:::[SOURCE BUCKET]/*"
+            ]
         }
     ]
 }

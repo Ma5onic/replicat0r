@@ -24,7 +24,7 @@ for bucket in $(cat ./publish/s3_src.txt);
 do
     $VAULTS aws s3api put-bucket-versioning --bucket ${bucket} --versioning-configuration Status=Enabled;
     echo "Creating s3 bucket in destination: ${bucket}"
-    $VAULTD aws s3 mb s3://${bucket}-replica --region us-west-2;
+    $VAULTD aws s3 mb s3://${bucket}-replica --region ${DSTREGION};
     $VAULTD aws s3api put-bucket-versioning --bucket ${bucket}-replica --versioning-configuration Status=Enabled;
 
 
@@ -32,7 +32,8 @@ do
 
     echo "Applying policy to bucket: ${bucket}"
     sed "s/BUCKET/$bucket/g; s/XACCOUNTX/$SRCACCOUNTID/g;" ./conf/dst_policy.txt > ./publish/dst_policy.json;
-     $VAULTD aws s3api put-bucket-policy --bucket ${bucket}-replica --policy file://publish/dst_policy.json --region us-west-2;
+    
+    $VAULTD aws s3api put-bucket-policy --bucket ${bucket}-replica --policy file://publish/dst_policy.json --region ${SRCREGION};
 
     echo "Creating Trust roles: "
 
