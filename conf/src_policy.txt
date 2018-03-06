@@ -26,7 +26,8 @@
           "Effect":"Allow",
           "Action":[
              "s3:ReplicateObject",
-             "s3:ReplicateDelete"
+             "s3:ReplicateDelete",
+             "s3:ObjectOwnerOverrideToBucketOwner"
           ],
           "Resource":[
               "arn:aws:s3:::BUCKET-replica/*"

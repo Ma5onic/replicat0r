@@ -1,14 +1,24 @@
 {
-    "Version": "2012-10-17",
+    "Version": "2008-10-17",
+    "Id": "S3-Console-Replication-Policy",
     "Statement": [
         {
-            "Sid": "DestinationBucketReplicaAllow",
+            "Sid": "replicat0rBucketPolicy",
             "Effect": "Allow",
             "Principal": {
                 "AWS": "arn:aws:iam::XACCOUNTX:root"
             },
-            "Action": ["s3:ReplicateObject", "s3:ReplicateDelete"],
-            "Resource": "arn:aws:s3:::BUCKET-replica/*"
+            "Action": [
+                "s3:GetBucketVersioning",
+                "s3:PutBucketVersioning",
+                "s3:ReplicateObject",
+                "s3:ReplicateDelete",
+                "s3:ObjectOwnerOverrideToBucketOwner"
+            ],
+            "Resource": [
+                "arn:aws:s3:::BUCKET-replica",
+                "arn:aws:s3:::BUCKET-replica/*"
+            ]
         }
     ]
 }

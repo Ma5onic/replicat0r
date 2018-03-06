@@ -40,17 +40,15 @@ do
 
     echo "Creating policy(s) on source..."
 
-    sed "s/BUCKET/$bucket/g; s/XSRCREGIONX/$SRCREGION/g; s/XDSTREGIONX/$DSTREGION/g; s%XKMSARNX%${KMSARN}%g" ./conf/src_policy.txt > ./publish/src_policy.json;
+    sed "s/BUCKET/$bucket/g; s/XSRCREGIONX/$SRCREGION/g; s/XDSTREGIONX/$DSTREGION/g;" ./conf/src_policy.txt > ./publish/src_policy.json;
     
     ARN=$($VAULTS aws iam create-policy --policy-name crrPolicy-${bucket} --policy-document file://publish/src_policy.json --output text | cut -f2 -d$'\t');
-
-    echo $ARN
 
     $VAULTS aws iam attach-role-policy --role-name crrRole-${bucket} --policy-arn ${ARN};
 
     echo "Setup s3 replication on source..."
 
-    sed "s/BUCKET/$bucket/g; s/XACCOUNTX/$SRCACCOUNTID/g; s/XROLEX/crrRole-${bucket}/g; s%XKMSARNX%${KMSARN}%g" ./conf/src_replica.txt > ./publish/src_replica.json;
+    sed "s/BUCKET/$bucket/g; s/XACCOUNTX/$SRCACCOUNTID/g; s/XROLEX/crrRole-${bucket}/g; s/DACCOUNTD/$DSTACCOUNTID/g;" ./conf/src_replica.txt > ./publish/src_replica.json;
 
     $VAULTS aws s3api put-bucket-replication --bucket ${bucket} --replication-configuration file://publish/src_replica.json;
 

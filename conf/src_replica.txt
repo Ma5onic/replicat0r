@@ -5,7 +5,9 @@
       "Prefix": "",
       "Status": "Enabled",
       "Destination": {
-        "Bucket": "arn:aws:s3:::BUCKET-replica"
+        "Bucket": "arn:aws:s3:::BUCKET-replica",
+        "Account":"DACCOUNTD",
+        "AccessControlTranslation": { "Owner": "Destination" }
       }
     }
   ]
