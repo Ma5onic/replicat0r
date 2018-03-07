@@ -1,5 +1,5 @@
 #replicat0r
-# Ermis Catevatis - Skio Music
+# Infosec Team @ SKIO Music
 
 This project is a quick automation to build replication policies between two accounts, source and destination.
 It will build the proper bucket policies and s3 iam policies for replication to work.
