@@ -68,3 +68,5 @@ Add a bucket policy similar to the one below, or append the two statements onto 
 
 
 Now you can run pre-seeder.sh using the same s3_src.txt file you used with replicat0r and it will automatically seed in all of your existing source bucket data into your destination bucket.
+Remember to remove these temporary bucket policies from the SOURCE buckets when you are done seeding. They are secure enough describing a Principal account (or decrease the vector with a user ARN if your backup account has users on it)
+
