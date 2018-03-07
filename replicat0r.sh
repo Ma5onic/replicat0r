@@ -33,7 +33,7 @@ do
 
     echo "Applying policy to destination bucket: ${bucket}"
     sed "s/BUCKET/$bucket/g; s/XACCOUNTX/$SRCACCOUNTID/g;" ./conf/dst_policy.txt > ./publish/dst_policy.json;
-    $VAULTD aws s3api put-bucket-policy --bucket ${bucket}-replica --policy file://publish/dst_policy.json --region ${SRCREGION};
+    $VAULTD aws s3api put-bucket-policy --bucket ${bucket}-replica --policy file://publish/dst_policy.json --region ${DSTREGION};
 
     echo "Creating Trust roles: "
     $VAULTS aws iam create-role --role-name crrRole-${bucket} --assume-role-policy-document file://publish/src_trust.json;
